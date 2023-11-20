@@ -1,17 +1,29 @@
 "use client";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/inputs/input";
-import React, { useCallback, useState } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import { useForm, FieldValues, SubmitHandler } from "react-hook-form";
 import { AuthButton } from "./authSocialButton";
 import { BsGithub, BsGoogle } from "react-icons/bs";
 import axios from "axios";
+import { toast } from "react-hot-toast";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 type Variant = "LOGIN" | "REGISTER";
 
 export const AuthForm = () => {
+  const session = useSession();
+  const router = useRouter();
   const [variant, setVariant] = useState<Variant>("LOGIN");
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (session?.status === "authenticated") {
+      console.log("Authenticated");
+      router.push("/users");
+    }
+  }, [session?.status, router]);
 
   const toggleVariant = useCallback(() => {
     if (variant === "LOGIN") {
@@ -38,15 +50,59 @@ export const AuthForm = () => {
 
     if (variant === "REGISTER") {
       //AXIOS
-      axios.post('/api/register', data)
+      axios
+        .post("/api/register", data)
+        .then(() => signIn('credentials', data))
+        .then(() => {
+          toast.success("Registration Successful!!");
+        })
+        .catch(() => {
+          toast.error("SOMETHING WENT WRONG!");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
     if (variant === "LOGIN") {
       //NEXTAUTH SIGIN
+      signIn("credentials", {
+        ...data,
+        redirect: false,
+      })
+        .then((callback) => {
+          if (callback?.error) {
+            toast.error("Invalid Credentials!");
+          }
+          if (callback?.ok && !callback?.error) {
+            toast.success("Loggin Successful!!");
+            router.push("/users");
+          }
+        })
+        .catch(() => {
+          toast.error("SOMETHING WENT WRONG!");
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
     }
   };
 
   const socialAction = (action: string) => {
     setIsLoading(true);
+    signIn(action, {
+      redirect: false,
+    })
+      .then((callback) => {
+        if (callback?.error) {
+          toast.error("Invalid Credentials!");
+        }
+        if (callback?.ok && !callback?.error) {
+          toast.success("Loggin Successful!!");
+        }
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   return (
@@ -67,7 +123,7 @@ export const AuthForm = () => {
               />
             </div>
           )}
-          {variant === 'LOGIN' && (
+          {variant === "LOGIN" && (
             <h2 className="text-center text-[1.2em] pb-8">
               Login and Join your Friends!
             </h2>

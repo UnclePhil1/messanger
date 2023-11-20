@@ -1,15 +1,21 @@
-import './globals.css'
-
+import { AuthContext } from "./context/authContext";
+import { ToasterContext } from "./context/toasterContext";
+import "./globals.css";
 
 export const metadata = {
-  title: 'Messanger',
-  description: 'GChatting Application',
-}
+  title: "Messanger",
+  description: "GChatting Application",
+};
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className=''>{children}</body>
+      <body className="">
+        <AuthContext>
+          <ToasterContext />
+          {children}
+        </AuthContext>
+      </body>
     </html>
-  )
+  );
 }
