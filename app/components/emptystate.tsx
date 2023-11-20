@@ -6,7 +6,7 @@ import React from 'react'
   return (
     <div className='w-full rounded-lg h-full p-4 bg-gray-100 flex flex-col justify-center items-center'>
         <h1 className='text-[20px] font-medium py-8'>
-            Start a Conversation Today!
+            Hey!, Start a Conversation Today!
         </h1>
         <Image 
             src={"/images/conversant.png"}
