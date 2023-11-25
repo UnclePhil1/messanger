@@ -25,6 +25,7 @@ const handleClick = () => {
 }
 
     return (
+    
         <li className="" onClick={handleClick}>
             <Link href={href} className={
             clsx(`
@@ -36,7 +37,7 @@ const handleClick = () => {
             leading-6
             font-semibold
             text-gray-500
-            hover:text-black
+            hover:text-primary
             hover:bg-gray-100
             `,
             active && 'bg-gray-100 text-black'

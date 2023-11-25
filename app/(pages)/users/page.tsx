@@ -7,7 +7,7 @@ import EmptyState from '../../components/emptystate';
 
  const Users = () => {
   return (
-    <div className='hidden lg:block lg:pl-80 h-full bg-primary p-8'>
+    <div className='hidden lg:block h-full bg-primary'>
       <EmptyState />
     </div>
   )

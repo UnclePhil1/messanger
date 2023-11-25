@@ -3,12 +3,22 @@ import React from "react";
 import useRoutes from "@/../../app/hooks/useRoute";
 import { useState } from "react";
 import DesktopItems from "./desktopItems";
+import Image from "next/image";
+import { User } from "@prisma/client";
+import Avatar from "../avatar";
 
-const DesktopSidebar = () => {
+interface DesktopSidebarProps {
+  currentUser: User;
+}
+
+const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
   const routes = useRoutes();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log({ currentUser });
   return (
-    <div className="
+    <div
+      className="
     hidden
     lg:fixed
     lg:inset-y-0
@@ -54,6 +64,11 @@ const DesktopSidebar = () => {
             />
           ))}
         </ul>
+      </nav>
+      <nav>
+        <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+          <Avatar user={currentUser} />
+        </div>
       </nav>
     </div>
   );
