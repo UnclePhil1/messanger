@@ -45,7 +45,9 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     >
       <Avatar user={data} />
       <div className="">
-        <div><p className="text-[16px] font-medium">{data.name}</p></div>
+        <div>
+          <p className="text-[14px] font-medium">{data.name}</p>
+        </div>
       </div>
     </div>
   );

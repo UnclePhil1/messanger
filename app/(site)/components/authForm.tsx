@@ -74,7 +74,7 @@ export const AuthForm = () => {
             toast.error("Invalid Credentials!");
           }
           if (callback?.ok && !callback?.error) {
-            toast.success("Loggin Successful!!");
+            toast.success("LOGGIN SUCCESSFUL!!");
             router.push("/users");
           }
         })
