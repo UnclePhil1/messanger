@@ -3,7 +3,6 @@ import React from "react";
 import useRoutes from "@/../../app/hooks/useRoute";
 import { useState } from "react";
 import DesktopItems from "./desktopItems";
-import Image from "next/image";
 import { User } from "@prisma/client";
 import Avatar from "../avatar";
 

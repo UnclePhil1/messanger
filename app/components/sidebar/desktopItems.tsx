@@ -1,34 +1,34 @@
-'use client'
+"use client";
 import clsx from "clsx";
 import Link from "next/link";
 
 interface DesktopItemsProps {
-    href: string;
-    label: string;
-    icon: any;
-    onClick?: () => void;
-    active?: boolean;
+  href: string;
+  label: string;
+  icon: any;
+  onClick?: () => void;
+  active?: boolean;
 }
 
-const DesktopItems:React.FC<DesktopItemsProps> = ({
-    href,
-    label,
-    icon: Icon,
-    active,
-    onClick,
+const DesktopItems: React.FC<DesktopItemsProps> = ({
+  href,
+  label,
+  icon: Icon,
+  active,
+  onClick,
 }) => {
+  const handleClick = () => {
+    if (onClick) {
+      return onClick();
+    }
+  };
 
-const handleClick = () => {
-   if (onClick) {
-        return onClick();
-   }
-}
-
-    return (
-    
-        <li className="" onClick={handleClick}>
-            <Link href={href} className={
-            clsx(`
+  return (
+    <li className="" onClick={handleClick}>
+      <Link
+        href={href}
+        className={clsx(
+          `
             group
             flex
             rounded-md
@@ -40,16 +40,14 @@ const handleClick = () => {
             hover:text-primary
             hover:bg-gray-100
             `,
-            active && 'bg-gray-100 text-black'
-            )
-            }>
-                <Icon className="h-6 w-6 shrink-0"/>
-            <span className="sr-only">
-                {label}
-            </span>
-            </Link>
-        </li>
-    )
-}
+          active && "bg-gray-100 text-black"
+        )}
+      >
+        <Icon className="h-6 w-6 shrink-0" />
+        <span className="sr-only">{label}</span>
+      </Link>
+    </li>
+  );
+};
 
 export default DesktopItems;
