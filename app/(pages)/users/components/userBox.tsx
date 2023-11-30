@@ -19,7 +19,7 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     axios
       .post("/api/conversations", {
         userId: data.id,
-      }, { timeout: 5000 })
+      })
       .then((data) => {
         router.push(`/conversations/${data.data.id}`);  
       })
@@ -38,9 +38,9 @@ const UserBox: React.FC<UserBoxProps> = ({ data }) => {
     bg-white
     p-3
   hover:bg-neutral-100
-  rounded-lg
-  transition
-  cursor-pointer
+    rounded-lg
+    transition
+    cursor-pointer
     "
     >
       <Avatar user={data} />

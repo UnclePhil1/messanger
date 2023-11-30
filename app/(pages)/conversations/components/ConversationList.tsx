@@ -3,16 +3,15 @@ import React, { useState } from "react";
 import { FullConversationType } from "../../../types";
 import { useRouter } from "next/navigation";
 import useConversation from "../../../hooks/useConversation";
-import clsx from "clsx";
 import { HiOutlineUserGroup } from "react-icons/hi";
-import ConversationBox from "./conversationBox";
+import ConversationBox from "./ConversationBox";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
-  initialItems,
+  initialItems
 }) => {
   const [items, setItems] = useState(initialItems);
   const router = useRouter();

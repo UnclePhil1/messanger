@@ -36,7 +36,7 @@ export async function POST(request: Request) {
           }
         },
         include: {
-          users: true,
+          users: true
         }
       });
 
@@ -54,8 +54,8 @@ export async function POST(request: Request) {
           },
           {
             userIds: {
-              equals: [userId, , currentUser.id],
-            },
+              equals: [userId, currentUser.id]
+            }
           }
         ]
       }
@@ -81,8 +81,8 @@ export async function POST(request: Request) {
         }
       },
       include: {
-        users: true,
-      },
+        users: true
+      }
     });
 
     return NextResponse.json(newConversation);

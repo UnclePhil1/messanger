@@ -8,7 +8,7 @@ import { FullConversationType } from "../../../types";
 import clsx from "clsx";
 import useOtherUser from "../../../hooks/useOtherUser";
 import { useSession } from "next-auth/react";
-import format from "date-fns/format";
+import { format } from "date-fns";
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -39,36 +39,34 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
 
   const hasSeen = useMemo(() => {
     if (!lastMessage) {
-      return false
+      return false;
     }
 
     const seenArray = lastMessage.seen || [];
     if (!userEmail) {
-      return false
+      return false;
     }
 
-    return seenArray
-    .filter((user) => user.email === userEmail).length !== 0;
-  }, [userEmail, lastMessage])
+    return seenArray.filter((user) => user.email === userEmail).length !== 0;
+  }, [userEmail, lastMessage]);
 
+  const lastMessageText = useMemo(() => {
+    if (lastMessage?.image) {
+      return "Sent an Image";
+    }
 
- const lastMessageText = useMemo(() => {
-  if (lastMessage?.image) {
-    return "sent an Image";
-  }
+    if (lastMessage?.body) {
+      return lastMessage.body;
+    }
 
-  if (lastMessage?.body) {
-    return lastMessage.body
-  }
-
-  return "Stated a Conversation";
-
- }, [lastMessage]);
+    return "Stated a Conversation";
+  }, [lastMessage]);
 
   return (
     <div
-    onClick={handleClick}
-      className={clsx(`
+      onClick={handleClick}
+      className={clsx(
+        `
     w-full
     relative
     flex
@@ -82,27 +80,28 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     transition
     cursor-pointer
     `,
-    selected ? 'bg-neutral-100' : 'bg-white'
-    )}
+        selected ? "bg-neutral-100" : "bg-white"
+      )}
     >
       <Avatar user={otherUser} />
       <div className="">
         <div>
-          <p className="text-[14px] font-medium">{data.name || otherUser.name}</p>
-          {
-            lastMessage?.createdAt && (
-              <p className="text-xs text-gray-400 font-light">
-                {format(new Date(lastMessage.createdAt), 'p')}
-              </p>
-            )
-          }
+          <p className="text-[16px] font-medium">
+            {data.name || otherUser.name}
+          </p>
+          {lastMessage?.createdAt && (
+            <p className="text-[12px] text-gray-400 font-light">
+              {format(new Date(lastMessage.createdAt), "p")}
+            </p>
+          )}
         </div>
         <p
-        className={clsx(`truncate text-sm`, hasSeen ? 'text-gray-500' : 'text-black font-medium')}
+          className={clsx(
+            `truncate text-[12px]`,
+            hasSeen ? "text-gray-500" : "text-black font-medium"
+          )}
         >
-          {
-            lastMessageText
-          }
+          {lastMessageText}
         </p>
       </div>
     </div>

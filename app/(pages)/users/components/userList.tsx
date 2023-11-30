@@ -1,5 +1,4 @@
 'use client'
-import React from 'react'
 import { User } from '@prisma/client';
 import UserBox from './userBox';
 import { HiOutlineUserGroup } from 'react-icons/hi';
@@ -8,9 +7,8 @@ interface UserListProps {
     items: User[]
 }
 
-const UserList: React.FC<UserListProps> = ({items}) => {
+const UserList: React.FC<UserListProps> = ({ items }) => {
   return (
-    <div>
         <aside>
             <div className='bg-white lg:rounded-md lg:h-[80vh] h-[100vh] p-4'>
                 <figure className='flex justify-between items-center py-3 px-4 mb-4 rounded-md shadow-sm'>
@@ -27,7 +25,6 @@ const UserList: React.FC<UserListProps> = ({items}) => {
                     }</div>
             </div>
         </aside>
-    </div>
   )
 }
 

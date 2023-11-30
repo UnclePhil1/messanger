@@ -1,7 +1,6 @@
 import prisma from '@/../../app/libs/prismadb'
 import getSessions from './getSession'
 
-import React from 'react'
 
 const getUsers = async () => {
   const session = await getSessions();
@@ -23,7 +22,7 @@ const getUsers = async () => {
     })
 
     return users;
-  } catch (error) {
+  } catch (error: any) {
     return [];
   }
 }

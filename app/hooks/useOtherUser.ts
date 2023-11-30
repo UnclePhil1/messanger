@@ -5,8 +5,7 @@ import { User } from "@prisma/client";
 
 const useOtherUser = (
   conversation:
-    | FullConversationType
-    | {
+    | FullConversationType | {
         users: User[];
       }
 ) => {
