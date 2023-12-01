@@ -55,7 +55,7 @@ const Form = () => {
           id="message"
           register={register}
           errors={errors}
-          placeholder="Start a Conversation..."
+          placeholder="Start a Conversation"
           required
         />
         <button
