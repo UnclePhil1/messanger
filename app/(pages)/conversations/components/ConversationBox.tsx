@@ -79,22 +79,14 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     rounded-lg
     transition
     cursor-pointer
+    overflow-hidden
     `,
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
       <Avatar user={otherUser} />
       <div className="">
-        <div>
-          <p className="text-[16px] font-medium">
-            {data.name || otherUser.name}
-          </p>
-          {lastMessage?.createdAt && (
-            <p className="text-[12px] text-gray-400 font-light">
-              {format(new Date(lastMessage.createdAt), "p")}
-            </p>
-          )}
-        </div>
+        <p className="text-[16px] font-medium">{data.name || otherUser.name}</p>
         <p
           className={clsx(
             `truncate text-[12px]`,
@@ -103,6 +95,11 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         >
           {lastMessageText}
         </p>
+        {lastMessage?.createdAt && (
+          <p className="text-[12px] text-gray-400 font-light overflow-hidden">
+            {format(new Date(lastMessage.createdAt), "p")}
+          </p>
+        )}
       </div>
     </div>
   );
