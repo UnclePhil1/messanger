@@ -10,11 +10,11 @@ export default async function ConversationsLayout({
   const conversations = await getConversations();
   return (
     <Sidebar>
-      <div className="h-full w-[100%] lg:flex justify-start items-center bg-primary lg:px-8 gap-10">
+      <div className="h-full w-[100%] lg:flex justify-start items-center bg-primary lg:px-8 gap-10 relative">
         <div className="lg:w-[25%] w-[100%] lg:rounded-md rounded-none">
           <ConversationList initialItems={conversations} />
         </div>
-        <div className="lg:w-[75%] w-[100%]">{children}</div>
+        <div className="lg:w-[75%] w-[100%] absolute lg:relative top-0 right-0">{children}</div>
       </div>
     </Sidebar>  
   );

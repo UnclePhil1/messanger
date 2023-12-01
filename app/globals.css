@@ -17,3 +17,25 @@ html,
   font-family: "Roboto", sans-serif;
   /* font-family: 'PT Sans', sans-serif; */
 }
+
+
+/* Width of the scroll track */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar:hover {
+  background: #f0efef;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #004AAD;
+  border-radius: 50px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #004AAD;
+}
