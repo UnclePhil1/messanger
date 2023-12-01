@@ -19,7 +19,7 @@ const Avatar: React.FC<Avatarprops> = ({ user }) => {
           className="w-full h-full"
         />
       </div>
-      <span className="w-2 h-2 top-0 right-[-8px] absolute bg-green-400 md:w-3 md:h-3 rounded-full border-2 border-white"></span>
+      <span className="w-2 h-2 top-0 absolute bg-green-400 md:w-3 md:h-3 rounded-full border-2 border-white"></span>
     </div>
   );
 };

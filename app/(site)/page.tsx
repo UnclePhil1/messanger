@@ -9,8 +9,8 @@ export default function Home() {
         src={"/images/sign.png"}
         width={700}
         height={300}
-        className="w-auto h-auto"
-        alt={"logo.png"}
+        className="w-full h-auto hidden lg:block"
+        alt={"logo.png"}    
       />
       <div className="w-[100%] h-[100%] flex flex-col justify-center items-center md:pt-[15%]">
         <Image

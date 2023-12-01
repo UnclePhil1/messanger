@@ -33,16 +33,17 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           <HiChevronLeft size={25} />
         </Link>
         <Avatar user={otherUser} />
-        <div className="flex flex-col justify-start items-center">
+        <div className="flex flex-col justify-start items-start">
           <div>
             <h2 className="text-[18px] font-medium">
               {conversation.name || otherUser.name}
             </h2>
           </div>
-          <p className="text-neutral-500 font-light text-[12px]">{statusText}</p>
+          <p className="text-blue-500 font-light text-[12px]">{statusText}</p>
         </div>
       </div>
       <HiEllipsisHorizontal size={30} onClick={() => null} className="text-sky-500 cursor-pointer hovertext-sky-600 transition"/>
+      
     </div>
   );
 };
