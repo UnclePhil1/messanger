@@ -1,11 +1,12 @@
 "use client";
 import { Conversation, User } from "@prisma/client";
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import useOtherUser from "../../../../hooks/useOtherUser";
 import Link from "next/link";
 import { HiChevronLeft } from "react-icons/hi";
 import Avatar from "../../../../components/avatar";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
+import ProfileDrawer from "./ProfileDrawer";
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -23,7 +24,14 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
 
     return "Active";
   }, [conversation]);
+  const [drawerOpen, setDrawerOpen] = useState(false);
   return (
+    <>
+    <ProfileDrawer
+      data={conversation}
+      isOpen ={drawerOpen}
+      onClose={() => setDrawerOpen(false)}
+    />
     <div className="w-full flex border-b-[1px] sm:px-4 py-3 lg:px-6 justify-between items-center shadow-sm">
       <div className="flex gap-3 items-center">
         <Link
@@ -42,9 +50,10 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
           <p className="text-blue-500 font-light text-[12px]">{statusText}</p>
         </div>
       </div>
-      <HiEllipsisHorizontal size={30} onClick={() => null} className="text-sky-500 cursor-pointer hovertext-sky-600 transition"/>
+      <HiEllipsisHorizontal size={30} onClick={() => setDrawerOpen(true)} className="text-sky-500 cursor-pointer hovertext-sky-600 transition"/>
       
     </div>
+    </>
   );
 };
 
