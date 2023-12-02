@@ -5,6 +5,7 @@ import { useState } from "react";
 import DesktopItems from "./desktopItems";
 import { User } from "@prisma/client";
 import Avatar from "../avatar";
+import SettingsModal from "./settingModal";
 
 interface DesktopSidebarProps {
   currentUser: User;
@@ -16,8 +17,10 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
 
   console.log({ currentUser });
   return (
-    <div
-      className="
+    <>
+    <SettingsModal currentUser={currentUser} isOpen={isOpen} onClose={() => setIsOpen(false)}/>
+      <div
+        className="
     hidden
     lg:fixed
     lg:inset-y-0
@@ -33,43 +36,44 @@ const DesktopSidebar: React.FC<DesktopSidebarProps> = ({ currentUser }) => {
     lg:flex-col
     justify-between
     "
-    >
-      <nav
-        className="
+      >
+        <nav
+          className="
         mt-4
         flex
         flex-col
         justify-between
         "
-      >
-        <ul
-          role="list"
-          className="
+        >
+          <ul
+            role="list"
+            className="
         flex
         flex-col
         items-center
         space-y-1
         gap-4
         "
-        >
-          {routes.map((item) => (
-            <DesktopItems
-              key={item.label}
-              href={item.href}
-              label={item.label}
-              icon={item.icon}
-              active={item.active}
-              onClick={item.onClick}
-            />
-          ))}
-        </ul>
-      </nav>
-      <nav>
-        <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
-          <Avatar user={currentUser} />
-        </div>
-      </nav>
-    </div>
+          >
+            {routes.map((item) => (
+              <DesktopItems
+                key={item.label}
+                href={item.href}
+                label={item.label}
+                icon={item.icon}
+                active={item.active}
+                onClick={item.onClick}
+              />
+            ))}
+          </ul>
+        </nav>
+        <nav>
+          <div className="cursor-pointer" onClick={() => setIsOpen(true)}>
+            <Avatar user={currentUser} />
+          </div>
+        </nav>
+      </div>
+    </>
   );
 };
 

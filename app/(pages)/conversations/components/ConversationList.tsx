@@ -19,7 +19,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
   return (
     <aside>
-      <div className="bg-white lg:rounded-md lg:h-[80vh] h-[100vh] p-4">
+      <div className="bg-white lg:rounded-md p-4 h-[100svh] lg:h-[80vh]">
         <figure className="flex justify-between items-center py-3 px-4 mb-4 rounded-md shadow-sm">
           <h1 className="text-black text-[1.5em] font-medium">Messages</h1>
           <HiOutlineUserGroup size={30} />

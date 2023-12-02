@@ -14,7 +14,7 @@ body,
 html,
 :root {
   height: 100%;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
   /* font-family: 'PT Sans', sans-serif; */
 }
 
@@ -38,4 +38,20 @@ html,
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #004AAD;
+}
+
+.delete_user {
+  animation: deleteUser 1s ease-out infinite;
+}
+
+@keyframes deleteUser {
+  0% {
+    background-color: #f7eeee;
+  }
+  50% {
+    background-color: #f7cdcd;
+  }
+  100% {
+    background-color: #f7ebeb;
+  }
 }
