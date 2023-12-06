@@ -5,26 +5,35 @@ import { useRouter } from "next/navigation";
 import useConversation from "../../../hooks/useConversation";
 import { HiOutlineUserGroup } from "react-icons/hi";
 import ConversationBox from "./ConversationBox";
+import GroupChatModal from "./groupChatModal";
+import { User } from "@prisma/client";
 
 interface ConversationListProps {
   initialItems: FullConversationType[];
+  users: User[];
 }
 
 const ConversationList: React.FC<ConversationListProps> = ({
-  initialItems
+  initialItems, users
 }) => {
   const [items, setItems] = useState(initialItems);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const router = useRouter();
   const { conversationId, isOpen } = useConversation();
 
   return (
+    <>
+    <GroupChatModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} users={users}/>
     <aside>
       <div className="bg-white lg:rounded-md p-4 h-[100svh] lg:h-[80vh]">
         <figure className="flex justify-between items-center py-3 px-4 mb-4 rounded-md shadow-sm">
           <h1 className="text-black text-[1.5em] font-medium">Messages</h1>
+          <div className="cursor-pointer" onClick={() => setIsModalOpen(true)}>
           <HiOutlineUserGroup size={30} />
+          </div>
         </figure>
-        <div>
+        <div className="overflow-y-auto overflow-hidden">
             {
                 items.map((item) => (
                     <ConversationBox 
@@ -37,6 +46,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
         </div>
       </div>
     </aside>
+    </>
   );
 };
 

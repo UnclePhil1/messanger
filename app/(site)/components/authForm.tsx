@@ -9,6 +9,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import spinner from '@/../../public/images/spinner.svg'
+import Image from "next/image";
 
 type Variant = "LOGIN" | "REGISTER";
 
@@ -146,7 +148,19 @@ export const AuthForm = () => {
             disabled={isLoading}
           />
           <Button disabled={isLoading} fullWidth type="submit">
-            {variant === "LOGIN" ? "SIGN IN" : "REGISTER NOW"}
+            {
+              isLoading ? 
+              (
+                <div className="w-full h-full fixed top-0 left-0 bg-[#000000f6] flex justify-center items-center z-50">
+                  <Image src={spinner} alt="spinner" width={700} height={300} className="w-[50px] h-[50px] flex justify-center items-center bg-transparent mx-auto"/>
+                </div>
+              ) 
+              : 
+              (
+
+                variant === "LOGIN" ? "SIGN IN" : "REGISTER NOW"
+              )
+            }
           </Button>
         </form>
         <div className="flex flex-col items-center gap-[1rem] mt-5 md:mt-[5px]">
