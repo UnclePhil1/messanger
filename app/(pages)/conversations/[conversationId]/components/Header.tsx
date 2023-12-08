@@ -14,6 +14,7 @@ interface HeaderProps {
   conversation: Conversation & {
     users: User[];
   };
+  isActive: boolean;
 }
 
 const Header: React.FC<HeaderProps> = ({ conversation }) => {
