@@ -7,6 +7,8 @@ import { HiChevronLeft } from "react-icons/hi";
 import Avatar from "../../../../components/avatar";
 import { HiEllipsisHorizontal } from "react-icons/hi2";
 import ProfileDrawer from "./ProfileDrawer";
+import AvatarGroup from "../../../../components/AvatarGroup";
+import useActiveList from "../../../../hooks/useActiveList";
 
 interface HeaderProps {
   conversation: Conversation & {
@@ -16,43 +18,53 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ conversation }) => {
   const otherUser = useOtherUser(conversation);
+  const { members } = useActiveList ();
+  const isActive = members.indexOf(otherUser?.email!) !== -1;
 
   const statusText = useMemo(() => {
     if (conversation.isGroup) {
       return `${conversation.users.length} members`;
     }
 
-    return "Active";
+    return isActive ? "Active" : "Offline";
   }, [conversation]);
   const [drawerOpen, setDrawerOpen] = useState(false);
+
   return (
     <>
-    <ProfileDrawer
-      data={conversation}
-      isOpen ={drawerOpen}
-      onClose={() => setDrawerOpen(false)}
-    />
-    <div className="w-full flex border-b-[1px] sm:px-4 py-3 lg:px-6 justify-between items-center shadow-sm">
-      <div className="flex gap-3 items-center">
-        <Link
-          href={"/conversations"}
-          className="lg:hidden block text-sky-500 hover:text-sky-600 transition-colors cursor-pointer hover:bg-white rounded-full p-1"
-        >
-          <HiChevronLeft size={25} />
-        </Link>
-        <Avatar user={otherUser} />
-        <div className="flex flex-col justify-start items-start">
-          <div>
-            <h2 className="text-[18px] font-medium">
-              {conversation.name || otherUser.name}
-            </h2>
+      <ProfileDrawer
+        data={conversation}
+        isOpen={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      />
+      <div className="w-full flex border-b-[1px] sm:px-4 py-3 lg:px-6 justify-between items-center shadow-sm">
+        <div className="flex gap-3 items-center">
+          <Link
+            href={"/conversations"}
+            className="lg:hidden block text-sky-500 hover:text-sky-600 transition-colors cursor-pointer hover:bg-white rounded-full p-1"
+          >
+            <HiChevronLeft size={25} />
+          </Link>
+          {conversation.isGroup ? (
+            <AvatarGroup users={conversation.users} />
+          ) : (
+            <Avatar user={otherUser} />
+          )}
+          <div className="flex flex-col justify-start items-start">
+            <div>
+              <h2 className="text-[18px] font-medium">
+                {conversation.name || otherUser.name}
+              </h2>
+            </div>
+            <p className="text-blue-500 font-light text-[12px]">{statusText}</p>
           </div>
-          <p className="text-blue-500 font-light text-[12px]">{statusText}</p>
         </div>
+        <HiEllipsisHorizontal
+          size={30}
+          onClick={() => setDrawerOpen(true)}
+          className="text-sky-500 cursor-pointer hovertext-sky-600 transition"
+        />
       </div>
-      <HiEllipsisHorizontal size={30} onClick={() => setDrawerOpen(true)} className="text-sky-500 cursor-pointer hovertext-sky-600 transition"/>
-      
-    </div>
     </>
   );
 };

@@ -9,6 +9,7 @@ import clsx from "clsx";
 import useOtherUser from "../../../hooks/useOtherUser";
 import { useSession } from "next-auth/react";
 import { format } from "date-fns";
+import AvatarGroup from "../../../components/AvatarGroup";
 
 interface ConversationBoxProps {
   data: FullConversationType;
@@ -84,7 +85,11 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
         selected ? "bg-neutral-100" : "bg-white"
       )}
     >
-      <Avatar user={otherUser} />
+      {data.isGroup ? (
+        <AvatarGroup users={data.users} />
+      ) : (
+        <Avatar user={otherUser} />
+      )}
       <div className="">
         <p className="text-[16px] font-medium">{data.name || otherUser.name}</p>
         <p
