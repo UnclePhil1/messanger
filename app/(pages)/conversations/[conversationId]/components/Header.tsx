@@ -28,7 +28,7 @@ const Header: React.FC<HeaderProps> = ({ conversation }) => {
     }
 
     return isActive ? "Active" : "Offline";
-  }, [conversation]);
+  }, [conversation, isActive]);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (

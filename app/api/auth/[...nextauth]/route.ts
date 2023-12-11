@@ -61,5 +61,7 @@ export const authOptions: AuthOptions = {
 
 
 const handler = NextAuth(authOptions);
+// export default (req: NextApiRequest, res: NextApiResponse) => handler(req, res);
+
 
 export { handler as GET, handler as POST };
