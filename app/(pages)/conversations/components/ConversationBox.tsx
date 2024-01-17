@@ -76,7 +76,7 @@ const ConversationBox: React.FC<ConversationBoxProps> = ({
     space-x-3
     bg-white
     p-3
-   hover:bg-neutral-100
+    hover:bg-neutral-100
     rounded-lg
     transition
     cursor-pointer

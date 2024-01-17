@@ -87,7 +87,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
         users={users}
       />
       <aside>
-        <div className="bg-white lg:rounded-md p-4 h-[100svh] lg:h-[80vh]">
+        <div className="bg-white lg:rounded-md p-4 h-[100svh] lg:h-[80vh] overflow-hidden overflow-y-auto">
           <figure className="flex justify-between items-center py-3 px-4 mb-4 rounded-md shadow-sm">
             <h1 className="text-black text-[1.5em] font-medium">Messages</h1>
             <div
@@ -97,7 +97,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
               <HiOutlineUserGroup size={30} />
             </div>
           </figure>
-          <div className="overflow-y-auto overflow-hidden">
+          <div className="overflow-auto">
             {items.map((item) => (
               <ConversationBox
                 key={item.id}
